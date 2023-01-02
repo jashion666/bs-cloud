@@ -1,7 +1,7 @@
 package org.bs.satoken.service;
 
 
-import org.bs.api.model.LoginUser;
+import org.bs.api.system.model.LoginUser;
 
 /**
  * ITokenService

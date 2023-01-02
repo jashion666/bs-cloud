@@ -5,7 +5,7 @@ import cn.dev33.satoken.reactor.context.SaReactorHolder;
 import cn.dev33.satoken.reactor.context.SaReactorSyncHolder;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.bs.api.model.LoginUser;
+import org.bs.api.system.model.LoginUser;
 import org.bs.common.core.constant.TokenConstant;
 import org.bs.common.core.enums.ResultCodeEnum;
 import org.bs.common.core.utils.ServletUtils;

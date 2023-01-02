@@ -1,4 +1,4 @@
-package org.bs.api.model;
+package org.bs.api.system.model;
 
 
 import lombok.AllArgsConstructor;

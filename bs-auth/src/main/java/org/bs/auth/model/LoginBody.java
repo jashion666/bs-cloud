@@ -1,8 +1,8 @@
 package org.bs.auth.model;
 
 import lombok.Data;
-import org.bs.api.validator.ValidatorGroup1;
-import org.bs.api.validator.ValidatorGroup3;
+import org.bs.common.core.validator.ValidatorGroup1;
+import org.bs.common.core.validator.ValidatorGroup3;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;

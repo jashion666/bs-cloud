@@ -1,4 +1,4 @@
-package org.bs.api.validator;
+package org.bs.common.core.validator;
 
 /**
  * @author :wkh

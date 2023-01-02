@@ -7,15 +7,12 @@
     </parent>
     <version>1.0.0</version>
     <modules>
-        <module>bs-api-system</module>
+        <module>bs-system</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bs-api</artifactId>
+    <artifactId>bs-module</artifactId>
     <packaging>pom</packaging>
+    <name>bs-module</name>
 
-    <name>bs-api</name>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>

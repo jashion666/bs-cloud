@@ -54,7 +54,7 @@
 
         <dependency>
             <groupId>org.bs</groupId>
-            <artifactId>bs-api</artifactId>
+            <artifactId>bs-api-system</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.bs</groupId>

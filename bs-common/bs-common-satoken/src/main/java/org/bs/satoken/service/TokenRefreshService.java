@@ -6,7 +6,7 @@ import cn.dev33.satoken.stp.SaLoginConfig;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONObject;
-import org.bs.api.model.LoginUser;
+import org.bs.api.system.model.LoginUser;
 import org.bs.common.core.constant.TokenConstant;
 import org.bs.common.core.utils.StringUtil;
 import org.bs.common.redis.RedisClient;

@@ -2,7 +2,7 @@ package org.bs.satoken.service.impl;
 
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import org.bs.api.model.LoginUser;
+import org.bs.api.system.model.LoginUser;
 import org.bs.satoken.service.ITokenService;
 import org.springframework.stereotype.Service;
 

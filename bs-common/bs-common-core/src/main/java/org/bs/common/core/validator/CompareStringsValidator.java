@@ -1,7 +1,7 @@
-package org.bs.api.validator;
+package org.bs.common.core.validator;
 
 import cn.hutool.core.bean.BeanUtil;
-import org.bs.api.validator.anno.CompareStrings;
+import org.bs.common.core.validator.anno.CompareStrings;
 import org.bs.common.core.enums.StringComparisonMode;
 
 import javax.validation.ConstraintValidator;
