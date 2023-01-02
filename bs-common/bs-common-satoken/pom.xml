@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bs-common</artifactId>
+        <groupId>org.bs</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <version>1.0.0</version>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bs-common-satoken</artifactId>
+    <packaging>jar</packaging>
+
+    <name>bs-common-satoken</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-jwt</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cn.hutool</groupId>
+                    <artifactId>hutool-jwt</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+</project>

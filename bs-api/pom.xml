@@ -8,14 +8,20 @@
     <version>1.0.0</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bs-common</artifactId>
-    <packaging>pom</packaging>
-    <name>bs-common</name>
+    <artifactId>bs-api</artifactId>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>bs-common-core</module>
-        <module>bs-common-redis</module>
-        <module>bs-common-satoken</module>
-    </modules>
+    <name>bs-api</name>
+    <url>http://maven.apache.org</url>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -4,7 +4,8 @@ server:
 
 spring:
   main:
-      web-application-type: reactive
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
   application:
     # \u5E94\u7528\u540D\u79F0
     name: bs-gateway
@@ -38,3 +39,5 @@ spring:
             groupId: DEFAULT_GROUP
             data-type: json
             rule-type: flow
+
+

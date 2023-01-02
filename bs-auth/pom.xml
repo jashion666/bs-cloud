@@ -43,10 +43,44 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>1.33.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-satoken</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-redis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.bs</groupId>
             <artifactId>bs-common-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
 
     </dependencies>
 </project>

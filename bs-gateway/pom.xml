@@ -79,8 +79,13 @@
         </dependency>
 
         <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.bs</groupId>
-            <artifactId>bs-common-redis</artifactId>
+            <artifactId>bs-common-satoken</artifactId>
         </dependency>
     </dependencies>
 
