@@ -1,6 +1,6 @@
 package org.bs.api.system.factory;
 
-import org.bs.api.system.service.RemoteUserService;
+import org.bs.api.system.remote.service.RemoteUserService;
 import org.bs.common.core.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,6 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
     @Override
     public RemoteUserService create(Throwable throwable) {
         log.error("用户服务调用失败:{}", throwable.getMessage());
-        return username -> AjaxResult.fail("服务暂不可用");
+        return username -> AjaxResult.fail("服务暂不可用").getData();
     }
 }

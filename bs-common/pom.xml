@@ -17,6 +17,7 @@
         <module>bs-common-redis</module>
         <module>bs-common-satoken</module>
         <module>bs-common-i18n</module>
+        <module>bs-common-generator</module>
     </modules>
 
 </project>

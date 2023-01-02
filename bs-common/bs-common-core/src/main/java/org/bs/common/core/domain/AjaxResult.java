@@ -1,5 +1,6 @@
 package org.bs.common.core.domain;
 
+import cn.hutool.json.JSONUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -79,6 +80,14 @@ public class AjaxResult extends ResponseEntity implements Serializable {
 
     public static AjaxResult fail(String message, Object data, ResultCodeEnum code) {
         return new AjaxResult(Body.builder().data(data).msg(message).code(code.getCode()).build(), HttpStatus.OK);
+    }
+
+    public Body getData() {
+        Object body = getBody();
+        if (body == null) {
+            return null;
+        }
+        return JSONUtil.toBean(body.toString(), Body.class);
     }
 
     @NoArgsConstructor

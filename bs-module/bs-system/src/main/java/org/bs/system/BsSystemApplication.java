@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * @author ruoyi
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.bs"})
 @EnableFeignClients
 @MapperScan("org.bs.system.mapper")
 public class BsSystemApplication {

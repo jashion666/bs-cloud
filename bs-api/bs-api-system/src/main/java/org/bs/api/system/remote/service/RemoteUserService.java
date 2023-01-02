@@ -1,4 +1,4 @@
-package org.bs.api.system.service;
+package org.bs.api.system.remote.service;
 
 import org.bs.api.system.factory.RemoteUserFallbackFactory;
 import org.bs.common.core.constant.ServiceNameConstants;
@@ -22,6 +22,6 @@ public interface RemoteUserService {
      * @return 结果
      */
     @GetMapping("/user/info/{username}")
-    public AjaxResult getUserInfo(@PathVariable("username") String username);
+    AjaxResult.Body getByUsername(@PathVariable("username") String username);
 
 }

@@ -5,16 +5,20 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bs.api.system.model.LoginUser;
+import org.bs.auth.model.LoginBody;
+import org.bs.auth.service.ILoginService;
 import org.bs.common.core.constant.TokenConstant;
 import org.bs.common.core.domain.AjaxResult;
 import org.bs.common.core.exception.ServiceException;
+import org.bs.common.core.validator.ValidatorGroup3;
 import org.bs.common.i18n.config.NacosI18nMessageSource;
-import org.bs.common.redis.RedisClient;
 import org.bs.satoken.service.ITokenService;
 import org.bs.satoken.service.TokenRefreshService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TokenController {
 
     @Autowired
-    private RedisClient redisClient;
+    private ILoginService loginService;
 
     @Autowired
     private ITokenService tokenService;
@@ -37,23 +41,18 @@ public class TokenController {
     private NacosI18nMessageSource messageSource;
 
     /**
-     * 认证token
+     * 认证
      *
      * @return json
      */
     @PostMapping("/authentication")
-    public AjaxResult authentication() {
+    public AjaxResult authentication(@Validated(ValidatorGroup3.class) @RequestBody LoginBody loginBody) {
 
         try {
-//            LoginUser loginUser = loginService.login(loginBody);
-            LoginUser loginUser = new LoginUser();
-            loginUser.setUsername("admin");
-            loginUser.setRememberMe(false);
-            loginUser.setUserid(1);
+            LoginUser loginUser = loginService.login(loginBody);
             StpUtil.login(loginUser.getUserid(), SaLoginConfig
                     .setExtra("username", loginUser.getUsername())
                     .setExtra("rememberMe", loginUser.isRememberMe()));
-
             LoginUser token = tokenService.getToken();
             tokenRefreshService.refreshToken();
             HttpHeaders headers = new HttpHeaders();
