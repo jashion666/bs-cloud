@@ -36,6 +36,10 @@ public class AjaxResult extends ResponseEntity implements Serializable {
         super(body, headers, status);
     }
 
+    public static AjaxResult success() {
+        return new AjaxResult(Body.builder().code(ResultCodeEnum.RESULT_SUCCESS_CODE.getCode()).msg("").build(), HttpStatus.OK);
+    }
+
     public static AjaxResult success(String message) {
         return new AjaxResult(Body.builder().code(ResultCodeEnum.RESULT_SUCCESS_CODE.getCode()).msg(message).build(), HttpStatus.OK);
     }

@@ -81,6 +81,11 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-i18n</artifactId>
+        </dependency>
+
 
     </dependencies>
 </project>

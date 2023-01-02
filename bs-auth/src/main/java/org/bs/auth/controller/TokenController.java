@@ -8,6 +8,7 @@ import org.bs.api.model.LoginUser;
 import org.bs.common.core.constant.TokenConstant;
 import org.bs.common.core.domain.AjaxResult;
 import org.bs.common.core.exception.ServiceException;
+import org.bs.common.i18n.config.NacosI18nMessageSource;
 import org.bs.common.redis.RedisClient;
 import org.bs.satoken.service.ITokenService;
 import org.bs.satoken.service.TokenRefreshService;
@@ -32,8 +33,11 @@ public class TokenController {
     @Autowired
     private TokenRefreshService tokenRefreshService;
 
+    @Autowired
+    private NacosI18nMessageSource messageSource;
+
     /**
-     * authentication
+     * 认证token
      *
      * @return json
      */
@@ -65,15 +69,28 @@ public class TokenController {
     }
 
     /**
+     * 刷新token
+     *
+     * @return json
+     */
+    @PostMapping("/refresh")
+    public AjaxResult refresh() {
+        LoginUser loginUser = tokenRefreshService.reLogin();
+        return AjaxResult.success(loginUser.getToken());
+    }
+
+    /**
      * logout
      *
      * @return json
      */
     @PostMapping("/logout")
     public AjaxResult logout() {
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        return AjaxResult.success(tokenInfo);
+        StpUtil.logout();
+        tokenRefreshService.logout();
+        return AjaxResult.success();
     }
+
     /**
      * logout
      *
@@ -82,6 +99,7 @@ public class TokenController {
     @PostMapping("/test")
     public AjaxResult test() {
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        String message = messageSource.getMessage("info.login.success");
         return AjaxResult.success(tokenInfo);
     }
 }
