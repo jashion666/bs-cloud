@@ -21,8 +21,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * @author :wkh
  */
@@ -36,30 +34,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Autowired
     private TokenRefreshService tokenRefreshService;
 
-
-    /**
-     * 注册 Sa-Token 全局过滤器
-     */
-//    @Bean
-//    public SaReactorFilter getSaReactorFilter(IgnoreWhiteProperties ignoreWhite) {
-//        return new SaReactorFilter()
-//                // 拦截地址
-//                .addInclude("/**")
-//                .addExclude("/favicon.ico", "/actuator/**")
-//                // 鉴权方法：每次访问进入
-//                .setAuth(obj -> {
-//                    // 登录校验 -- 拦截所有路由
-//                    SaRouter.match("/**")
-//                            .notMatch(ignoreWhite.getWhites())
-//                            .check(r -> {
-//                                // 检查是否登录 是否有token
-//                                StpUtil.checkLogin();
-//                            });
-//                }).setError(e -> {
-//                    log.error(e.getMessage(), e);
-//                    return e;
-//                });
-//    }
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -80,9 +54,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
             SaReactorSyncHolder.setContext(exchange);
             // 调用satoken认证用户登录
             StpUtil.checkLogin();
-            // 传递token
-//            addHeader(mutate, StpUtil.getTokenName(), StpUtil.getTokenValue());
-
         } catch (NotLoginException exception) {
             // 判断token是否过期
             if (NotLoginException.TOKEN_TIMEOUT.equals(exception.getType())) {
@@ -90,14 +61,9 @@ public class AuthFilter implements GlobalFilter, Ordered {
                 if (!tokenRefreshService.verifyRefreshToken(true)) {
                     throw exception;
                 }
-
-                HttpServletResponse response = (HttpServletResponse) exchange.getResponse();
-                // TODO 网关传递给子应用时，需要将token重新设置到header中，否则子应用获取不到token
-                // TODO 刷新token时 可正常访问，需要验证response是有网关返回还是又子应用返回 从而下发新的token
-                // if refresh token is valid then re login and send new access token
                 LoginUser loginUser = tokenRefreshService.reLogin();
-                response.setHeader(TokenConstant.AUTHORIZATION, loginUser.getToken());
-                response.setHeader(TokenConstant.AUTHORIZATION_REFRESH, String.valueOf(ResultCodeEnum.TOKEN_REFRESH.getCode()));
+                addHeader(mutate, TokenConstant.AUTHORIZATION, loginUser.getToken());
+                addHeader(mutate, TokenConstant.AUTHORIZATION_REFRESH, String.valueOf(ResultCodeEnum.TOKEN_REFRESH.getCode()));
                 return chain.filter(exchange);
             }
 
@@ -108,11 +74,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
             SaReactorSyncHolder.clearContext();
         }
 
-        // ---------- 执行
-
         // 写入全局上下文 (同步)
         SaReactorSyncHolder.setContext(exchange);
-
         // 执行
         return chain.filter(exchange).contextWrite(ctx -> {
             // 写入全局上下文 (异步)
@@ -123,34 +86,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
             SaReactorSyncHolder.clearContext();
         });
 
-
-//        try {
-//            // 调用satoken认证用户登录
-//            StpUtil.checkLogin();
-//            // 传递token
-//            addHeader(mutate, StpUtil.getTokenName(), StpUtil.getTokenValue());
-//        } catch (NotLoginException exception) {
-//            // 判断token是否过期
-//            if (NotLoginException.TOKEN_TIMEOUT.equals(exception.getType())) {
-//                // 判断refresh token是否过期
-//                if (!tokenRefreshService.verifyRefreshToken(true)) {
-//                    throw exception;
-//                }
-//
-//                HttpServletResponse response = (HttpServletResponse) exchange.getResponse();
-//                // TODO 网关传递给子应用时，需要将token重新设置到header中，否则子应用获取不到token
-//                // TODO 刷新token时 可正常访问，需要验证response是有网关返回还是又子应用返回 从而下发新的token
-//                // if refresh token is valid then re login and send new access token
-//                LoginUser loginUser = tokenRefreshService.reLogin();
-//                response.setHeader(TokenConstant.AUTHORIZATION, loginUser.getToken());
-//                response.setHeader(TokenConstant.AUTHORIZATION_REFRESH, String.valueOf(ResultCodeEnum.TOKEN_REFRESH.getCode()));
-//                return chain.filter(exchange);
-//            }
-//
-//            log.error(exception.getMessage(), exception);
-//            throw exception;
-//        }
-//        return chain.filter(exchange);
     }
 
     /**

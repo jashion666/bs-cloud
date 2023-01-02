@@ -54,10 +54,11 @@ public class TokenRefreshService {
         LoginUser jwtUser = getJwtUser();
         // if rememberMe use rememberMeTimeout. otherwise use timeout
         long expireTime = jwtUser.isRememberMe() ? saTokenProperties.getRememberMeTimeout() : saTokenProperties.getTimeout();
+        long tokenTime = expireTime + (TokenConstant.REFRESH_TOKEN_MINUTE * TokenConstant.MILLIS_MINUTE);
         // this token saved in database ,expireTime is more than expireTime, current is 60 minutes more
-        String token = jwtService.createToken(jwtUser.getUserid().toString(), jwtUser.getUsername(), expireTime + (TokenConstant.REFRESH_TOKEN_MINUTE * TokenConstant.MILLIS_MINUTE));
+        String token = jwtService.createToken(jwtUser.getUserid().toString(), jwtUser.getUsername(), tokenTime);
         // save or update refresh token
-        redisClient.set(userTokenKey(jwtUser), token, expireTime);
+        redisClient.set(userTokenKey(jwtUser), token, tokenTime);
     }
 
     /**
