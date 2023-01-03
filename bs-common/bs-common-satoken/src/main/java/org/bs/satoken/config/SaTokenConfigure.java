@@ -27,7 +27,7 @@ public class SaTokenConfigure {
      * 配置satoken
      * @return SaTokenConfig
      */
-    @Bean(name = "getSaTokenConfigPrimary")
+    @Bean
     @Primary
     public SaTokenConfig getSaTokenConfigPrimary() {
         SaTokenConfig config = new SaTokenConfig();

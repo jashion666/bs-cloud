@@ -55,11 +55,17 @@
             <artifactId>bs-common-satoken</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>org.bs</groupId>
-            <artifactId>bs-common-i18n</artifactId>
+            <artifactId>bs-common-security</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bs</groupId>
+                    <artifactId>bs-common-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
 
     </dependencies>
 </project>

@@ -231,6 +231,12 @@
                 <artifactId>bs-common-i18n</artifactId>
                 <version>1.0.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.bs</groupId>
+                <artifactId>bs-common-security</artifactId>
+                <version>1.0.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

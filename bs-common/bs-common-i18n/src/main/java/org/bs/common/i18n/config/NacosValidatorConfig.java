@@ -6,14 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author :wkh.
  */
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public class NacosValidatorConfig implements WebMvcConfigurer {
 
     @Autowired
     private NacosI18nMessageSource messageSource;
@@ -23,15 +22,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return new LocalInterceptor();
     }
 
-    @Bean
-    public WebMvcConfigurer webMvcConfigurer() {
-
-        return new WebMvcConfigurer() {
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                registry.addInterceptor(localInterceptor()).addPathPatterns("/**");
-            }
-        };
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localInterceptor()).addPathPatterns("/**");
     }
 
     @Override

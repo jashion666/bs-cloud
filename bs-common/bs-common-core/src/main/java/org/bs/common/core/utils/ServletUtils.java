@@ -1,5 +1,6 @@
 package org.bs.common.core.utils;
 
+import cn.hutool.json.JSONUtil;
 import org.bs.common.core.domain.AjaxResult;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -26,10 +27,11 @@ public class ServletUtils {
      * @param value    响应内容
      * @return Mono<Void>
      */
-    public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, Object value) {
+    public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, AjaxResult ajaxResult) {
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        DataBuffer dataBuffer = response.bufferFactory().wrap(com.alibaba.fastjson.JSON.toJSONString(AjaxResult.fail(value.toString())).getBytes());
+        AjaxResult.Body data = ajaxResult.getData();
+        DataBuffer dataBuffer = response.bufferFactory().wrap(JSONUtil.toJsonStr(data).getBytes());
         return response.writeWith(Mono.just(dataBuffer));
     }
 

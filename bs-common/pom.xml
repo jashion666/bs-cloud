@@ -18,6 +18,7 @@
         <module>bs-common-satoken</module>
         <module>bs-common-i18n</module>
         <module>bs-common-generator</module>
+        <module>bs-common-security</module>
     </modules>
 
 </project>

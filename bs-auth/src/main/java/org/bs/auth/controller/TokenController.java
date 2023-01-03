@@ -49,6 +49,7 @@ public class TokenController {
     public AjaxResult authentication(@Validated(ValidatorGroup3.class) @RequestBody LoginBody loginBody) {
 
         try {
+
             LoginUser loginUser = loginService.login(loginBody);
             StpUtil.login(loginUser.getUserid(), SaLoginConfig
                     .setExtra("username", loginUser.getUsername())
