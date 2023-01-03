@@ -15,6 +15,7 @@
         <module>bs-api</module>
         <module>bs-module</module>
         <module>bs-doc</module>
+        <module>bs-visual</module>
     </modules>
 
     <properties>
@@ -34,7 +35,9 @@
         <druid-spring-boot-starter>1.2.15</druid-spring-boot-starter>
         <mybatis-plus-boot-starter>3.5.2</mybatis-plus-boot-starter>
         <mybatis-plus-generator>3.4.1</mybatis-plus-generator>
+        <spring-boot-admin.version>2.7.5</spring-boot-admin.version>
     </properties>
+
     <dependencies>
         <!-- bootstrap 启动器 -->
         <dependency>

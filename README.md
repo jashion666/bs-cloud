@@ -21,6 +21,9 @@
     │       └── bs-common-security     // 安全模块
     ├── bs-modules                     // 业务模块
     │       └── bs-system              // 系统模块 [8083]
+    ├── bs-visual
+    │       └── bs-monitor             // 系统监控 [8084]
+
     ├──pom.xml                         // 公共依赖
 
 ### 系统架构图
