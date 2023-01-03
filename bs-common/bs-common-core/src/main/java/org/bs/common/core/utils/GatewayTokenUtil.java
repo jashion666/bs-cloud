@@ -1,5 +1,6 @@
 package org.bs.common.core.utils;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObject;
@@ -23,30 +24,32 @@ public class GatewayTokenUtil {
         String token = UUID.fastUUID().toString();
         // 过期时间
         long expired = System.currentTimeMillis() + TokenConstant.GATE_WAY_TOKEN_MINUTES;
+        String expiredStr = String.valueOf(expired);
         JSONObject jsonObject = new JSONObject();
+        jsonObject.set("expired", expiredStr);
         jsonObject.set("token", token);
-        jsonObject.set("expired", expired);
-        return jsonObject.toString();
+        return Base64.encode(jsonObject.toString());
     }
 
     /**
      * 验证token
      *
-     * @param token 凭证
+     * @param base64Token 凭证
      * @return boolean
      */
-    public static boolean verify(String token) {
+    public static boolean verify(String base64Token) {
 
-        if (StringUtil.isEmpty(token)) {
+        if (StringUtil.isEmpty(base64Token)) {
             return false;
         }
         try {
+            String token = Base64.decodeStr(base64Token);
             JSONObject jsonObject = JSONUtil.parseObj(token);
             if (ObjectUtil.isEmpty(jsonObject.get("token"))) {
                 return false;
             }
-            Long expired = (Long) jsonObject.get("expired");
-            if (System.currentTimeMillis() > expired) {
+            String expired = (String) jsonObject.get("expired");
+            if (System.currentTimeMillis() > Long.parseLong(expired)) {
                 return false;
             }
         } catch (Exception e) {

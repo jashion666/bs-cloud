@@ -14,11 +14,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserService> {
+
     private static final Logger log = LoggerFactory.getLogger(RemoteUserFallbackFactory.class);
 
     @Override
     public RemoteUserService create(Throwable throwable) {
         log.error("用户服务调用失败:{}", throwable.getMessage());
-        return username -> AjaxResult.fail("服务暂不可用").getData();
+        return new RemoteUserService() {
+            @Override
+            public AjaxResult.Body getByUsername(String username) {
+                return AjaxResult.fail("服务暂不可用").getData();
+            }
+
+            @Override
+            public AjaxResult.Body test() {
+                return AjaxResult.fail("服务暂不可用").getData();
+            }
+        };
     }
 }

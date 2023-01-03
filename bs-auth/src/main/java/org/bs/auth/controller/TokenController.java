@@ -1,10 +1,10 @@
 package org.bs.auth.controller;
 
 import cn.dev33.satoken.stp.SaLoginConfig;
-import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bs.api.system.model.LoginUser;
+import org.bs.api.system.remote.service.RemoteUserService;
 import org.bs.auth.model.LoginBody;
 import org.bs.auth.service.ILoginService;
 import org.bs.common.core.constant.TokenConstant;
@@ -39,6 +39,9 @@ public class TokenController {
 
     @Autowired
     private NacosI18nMessageSource messageSource;
+
+    @Autowired
+    private RemoteUserService remoteUserService;
 
     /**
      * 认证
@@ -98,8 +101,6 @@ public class TokenController {
      */
     @PostMapping("/test")
     public AjaxResult test() {
-        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        String message = messageSource.getMessage("info.login.success");
-        return AjaxResult.success(tokenInfo);
+        return AjaxResult.success(remoteUserService.test());
     }
 }

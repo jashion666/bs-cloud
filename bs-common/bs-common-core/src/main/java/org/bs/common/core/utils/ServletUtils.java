@@ -7,8 +7,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import reactor.core.publisher.Mono;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -23,8 +27,8 @@ public class ServletUtils {
     /**
      * 设置webflux模型响应
      *
-     * @param response ServerHttpResponse
-     * @param value    响应内容
+     * @param response   ServerHttpResponse
+     * @param ajaxResult 响应内容
      * @return Mono<Void>
      */
     public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, AjaxResult ajaxResult) {
@@ -46,6 +50,27 @@ public class ServletUtils {
             return URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             return "";
+        }
+    }
+
+    /**
+     * 获取request
+     */
+    public static HttpServletRequest getRequest() {
+        try {
+            return getRequestAttributes().getRequest();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+    public static ServletRequestAttributes getRequestAttributes() {
+        try {
+            RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+            return (ServletRequestAttributes) attributes;
+        } catch (Exception e) {
+            return null;
         }
     }
 }

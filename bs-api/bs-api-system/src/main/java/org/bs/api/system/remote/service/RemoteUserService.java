@@ -24,4 +24,12 @@ public interface RemoteUserService {
     @GetMapping("/user/info/{username}")
     AjaxResult.Body getByUsername(@PathVariable("username") String username);
 
+    /**
+     * 通过用户名查询用户信息
+     *
+     * @return 结果
+     */
+    @GetMapping("/user/test")
+    AjaxResult.Body test();
+
 }
