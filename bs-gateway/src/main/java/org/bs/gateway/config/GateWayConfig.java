@@ -1,6 +1,5 @@
 package org.bs.gateway.config;
 
-import lombok.Value;
 import org.bs.gateway.handler.SentinelFallbackHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
