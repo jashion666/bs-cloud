@@ -1,9 +1,9 @@
 # Tomcat
-server: 
+server:
   port: 8082
 
 # Spring
-spring: 
+spring:
   application:
     # 应用名称
     name: bs-auth
@@ -20,3 +20,33 @@ spring:
         # 共享配置
         shared-configs:
           - bs-application.${spring.cloud.nacos.config.file-extension}
+#          - bs-stream-kafka.${spring.cloud.nacos.config.file-extension}
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        # log topic
+        log-out-0:
+          destination: log-topic
+          group: log_group
+          binder: kafka
+        # sms-topic
+        sms-out-0:
+          destination: sms-topic
+          group: log_group
+          binder: kafka
+          consumer:
+            max-attempts: 1
+
+        # in-0固定 消费者需要有bean对应与in-0前的名称对应
+        # log topic
+        log-in-0:
+          destination: log-topic
+          group: log_group
+          binder: kafka
+        # sms-topic
+        sms-in-0:
+          destination: sms-topic
+          group: log_group
+          binder: kafka

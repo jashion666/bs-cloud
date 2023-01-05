@@ -55,7 +55,6 @@
             <artifactId>bs-common-satoken</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.bs</groupId>
             <artifactId>bs-common-security</artifactId>
@@ -65,6 +64,11 @@
                     <artifactId>bs-common-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-kafka-producer</artifactId>
         </dependency>
 
     </dependencies>

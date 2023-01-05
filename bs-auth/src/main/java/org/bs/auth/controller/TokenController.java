@@ -43,6 +43,9 @@ public class TokenController {
     @Autowired
     private RemoteUserService remoteUserService;
 
+//    @Autowired
+//    private LogProducer logProducer;
+
     /**
      * 认证
      *
@@ -53,6 +56,7 @@ public class TokenController {
 
         try {
 
+//            logProducer.send("你好啊");
             LoginUser loginUser = loginService.login(loginBody);
             StpUtil.login(loginUser.getUserid(), SaLoginConfig
                     .setExtra("username", loginUser.getUsername())

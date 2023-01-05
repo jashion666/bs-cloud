@@ -1,0 +1,54 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: bs-kafka-consumer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        log-out-0:
+          destination: log-topic
+          group: log_group
+          binder: kafka
+        log-in-0:
+          destination: log-topic
+          group: log_group
+          binder: kafka
+        # sms-topic
+#        sms-out-0:
+#          destination: sms-topic
+#          group: sms_group
+#          binder: kafka
+#          consumer:
+#            max-attempts: 1
+#        # sms-topic
+#        sms-in-0:
+#          destination: sms-topic
+#          group: sms_group
+#          binder: kafka
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: localhost:9092
+#        bindings:
+#          sms-in-0:
+#            consumer:
+#              ackMode: MANUAL # sms手动确认消息
+#      bindings:
+#
+#        # in-0固定 消费者需要有bean对应与in-0前的名称对应
+#        # log topic
+#        log-in-0:
+#          destination: log-topic
+#          group: log_group
+#          binder: kafka
+#        # sms-topic
+#        sms-in-0:
+#          destination: sms-topic
+#          group: log_group
+#          binder: kafka
+
+
