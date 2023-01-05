@@ -33,7 +33,7 @@ public class LoginServiceImpl implements ILoginService {
 
         String username = loginBody.getUsername();
         AjaxResult.Body body = remoteUserService.getByUsername(username);
-        if (body == null || ResultCodeEnum.RESULT_SUCCESS_CODE.getCode() != body.getCode()) {
+        if (body == null || body.getData() == null || ResultCodeEnum.RESULT_SUCCESS_CODE.getCode() != body.getCode()) {
             throw new ServiceException(messageService.getMessage("error.login"));
         }
         MUserEntity userInfo = JSONUtil.parse(body.getData()).toBean(MUserEntity.class);
@@ -41,6 +41,6 @@ public class LoginServiceImpl implements ILoginService {
             throw new ServiceException(messageService.getMessage("error.login"));
         }
 
-        return LoginUser.builder().userid(userInfo.getId()).username(userInfo.getUsername()).build();
+        return LoginUser.builder().userid(userInfo.getId()).username(userInfo.getNickname()).rememberMe(loginBody.isRememberMe()).build();
     }
 }

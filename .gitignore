@@ -37,3 +37,15 @@ build/
 ### Mac OS ###
 .DS_Store
 /docker/sentinel-docker/root/
+
+# dependencies
+bs-ui/node_modules
+# IDEs and editors
+bs-ui/.idea
+bs-ui/.project
+bs-ui/.classpath
+bs-ui/.c9/
+bs-ui/*.launch
+bs-ui/.settings/
+bs-ui/*.sublime-workspace
+bs-ui/node

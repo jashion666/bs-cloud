@@ -3,6 +3,8 @@ package org.bs.common.core.global;
 import lombok.extern.slf4j.Slf4j;
 import org.bs.common.core.domain.AjaxResult;
 import org.bs.common.core.domain.ObjectErrorResult;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @ControllerAdvice
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class MethodArgumentNotValidExceptionAdvice {
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

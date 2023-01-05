@@ -14,9 +14,11 @@ import org.bs.common.core.validator.ValidatorGroup3;
 import org.bs.common.i18n.config.NacosI18nMessageSource;
 import org.bs.satoken.service.ITokenService;
 import org.bs.satoken.service.TokenRefreshService;
+import org.bs.satoken.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,7 +63,7 @@ public class TokenController {
             HttpHeaders headers = new HttpHeaders();
             headers.add(TokenConstant.AUTHORIZATION, token.getToken());
             headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, TokenConstant.AUTHORIZATION);
-            return AjaxResult.success("ok", headers, null);
+            return AjaxResult.success(messageSource.getMessage("info.login.success"), headers, null);
         } catch (ServiceException e) {
             return AjaxResult.fail(e.getMessage());
         } catch (Exception e) {
@@ -86,7 +88,7 @@ public class TokenController {
      *
      * @return json
      */
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public AjaxResult logout() {
         StpUtil.logout();
         tokenRefreshService.logout();
@@ -94,12 +96,12 @@ public class TokenController {
     }
 
     /**
-     * logout
+     * account
      *
      * @return json
      */
-    @PostMapping("/test")
-    public AjaxResult test() {
-        return AjaxResult.success(remoteUserService.test());
+    @GetMapping("/account")
+    public AjaxResult account() {
+        return AjaxResult.success(SessionUtil.getUserInfo());
     }
 }

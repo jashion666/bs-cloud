@@ -6,6 +6,7 @@ import org.bs.common.core.domain.AjaxResult;
 import org.bs.common.core.enums.ResultCodeEnum;
 import org.bs.common.i18n.config.NacosI18nMessageSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 @ControllerAdvice
 @Slf4j
+@Order(8)
 public class GlobalExceptionAdvice {
 
     @Autowired

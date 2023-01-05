@@ -26,7 +26,6 @@
     │       └── bs-kafka-producer      // 消息提供者
     ├── bs-visual
     │       └── bs-monitor             // 系统监控 [8084]
-
     ├──pom.xml                         // 公共依赖
 
 ### 系统架构图

@@ -1,0 +1,30 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzTheme="light"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Base Cloud System</h1>
+      </a>
+    </div>
+    <app-sidbar [isCollapsed]="isCollapsed" (routerToggleEvent)="handleRouterToggle($event)"></app-sidbar>
+  </nz-sider>
+
+  <app-header [userInfo]="userInfo" [isCollapsed]="isCollapsed" (collapsedToggleEvent)="handleCollapsedToggle($event)"></app-header>
+  <nz-layout>
+    <div style="margin-top: 64px">
+      <nz-content>
+        <div class="inner-content" id="inner-content">
+          <div [@slideInAnimation]="routerToggle ? 'active1' : 'active2'">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </nz-content>
+    </div>
+  </nz-layout>
+</nz-layout>

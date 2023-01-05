@@ -1,0 +1,46 @@
+<div nz-row xmlns="http://www.w3.org/1999/html">
+  <div nz-col [nzSpan]="6" [nzOffset]="9" style="margin-top: 6rem;text-align: center">
+    <h1 nz-typography style="padding-right: 20px;">
+      <i nz-icon [nzType]="'smile'" [nzTheme]="'twotone'" style="font-size: 24px;margin-right: 2px;">
+      </i>
+      BS CLOUD PROJECT
+    </h1>
+  </div>
+</div>
+<div nz-row>
+  <div nz-col [nzSpan]="6" [nzOffset]="9" class="text-align-center" style="margin-top: 1rem;">
+    <form nz-form [formGroup]="userNamePasswordForm" class="login-form">
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="fms.msg('username')" [nzValidateStatus]="fms.state('username')">
+          <nz-input-group nzPrefixIcon="user" nzSize="large">
+            <input type="text" nz-input [formControlName]="'username'" placeholder="用户" nzSize="default"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="fms.msg('password')" [nzValidateStatus]="fms.state('password')">
+          <nz-input-group nzPrefixIcon="lock" nzSize="large">
+            <input type="password" nz-input [formControlName]="'password'" placeholder="密码" nzSize="default"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox [formControlName]="'rememberMe'">Remember Me</label>
+        </nz-form-control>
+        <nz-form-control style="text-align: right">
+          <a>Forget password?</a>
+        </nz-form-control>
+      </nz-form-item>
+
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [nzSize]="'large'"
+              [nzLoading]="loading" (click)="login()" >Login
+      </button>
+      <br/><br/>
+
+    </form>
+  </div>
+</div>
+

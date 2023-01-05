@@ -1,0 +1,9 @@
+<nz-page-header class="site-page-header site-page-header-layout site-page-header-bottom" [nzTitle]="titleTem">
+  <nz-breadcrumb nz-page-header-breadcrumb>
+    <nz-breadcrumb-item *ngFor="let item of breadcrumb">{{item}}</nz-breadcrumb-item>
+  </nz-breadcrumb>
+</nz-page-header>
+<ng-template #titleTem>
+  <span class="ant-page-header-heading-title-span">{{title}}</span>
+</ng-template>
+<div class="newline"></div>
