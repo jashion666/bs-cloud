@@ -11,18 +11,19 @@
 
     <artifactId>bs-kafka-producer</artifactId>
     <packaging>jar</packaging>
-
+    <description>mq提供者</description>
     <name>bs-kafka-producer</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
-            <version>3.1.0</version>
+            <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs</groupId>
+            <artifactId>bs-common-core</artifactId>
         </dependency>
     </dependencies>
 

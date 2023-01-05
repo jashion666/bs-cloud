@@ -17,6 +17,6 @@ public class SmsProducer {
     private StreamBridge streamBridge;
 
     public void send(String msg) {
-        streamBridge.send("sms-out-0", MessageBuilder.withPayload(msg).build());
+        streamBridge.send("sms-topic", MessageBuilder.withPayload(msg).build());
     }
 }
