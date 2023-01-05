@@ -21,6 +21,9 @@
     │       └── bs-common-security     // 安全模块
     ├── bs-modules                     // 业务模块
     │       └── bs-system              // 系统模块 [8083]
+    ├── bs-stream-kafka                // mq模块（kafka）
+    │       └── bs-kafka-consumer      // 消费者[8085]
+    │       └── bs-kafka-producer      // 消息提供者
     ├── bs-visual
     │       └── bs-monitor             // 系统监控 [8084]
 

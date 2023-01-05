@@ -4,7 +4,6 @@ import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManag
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import org.bs.common.core.domain.AjaxResult;
 import org.bs.common.core.utils.ServletUtils;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
@@ -18,7 +17,7 @@ import reactor.core.publisher.Mono;
 public class SentinelFallbackHandler implements WebExceptionHandler {
 
     private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
-        return ServletUtils.webFluxResponseWriter((ServerHttpResponse) response, AjaxResult.fail("请勿频繁访问，请稍后再试"));
+        return ServletUtils.webFluxResponseWriter(exchange.getResponse(), AjaxResult.fail("请勿频繁访问"));
     }
 
     @Override
