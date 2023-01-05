@@ -30,5 +30,5 @@
     ├──pom.xml                         // 公共依赖
 
 ### 系统架构图
-<img src="bs-doc/src/main/resources/image/bs-cloud-framework.png">
+<img src="bs-doc/image/bs-cloud-framework.png">
 
